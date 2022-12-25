@@ -107,14 +107,14 @@ check_cpu_temp() {
         echo "Current CPU Temp ${CPU_TEMP}"
     fi
 
-    if [ $CPU_TEMP -ge 95 ]; then
+    if [ $CPU_TEMP -ge 98 ]; then
         set_fan CPU 255
-    elif [ $(float_ge $CPU_TEMP 90.0) == 1 ]; then
-        set_fan CPU 200
+    elif [ $(float_ge $CPU_TEMP 95.0) == 1 ]; then
+        set_fan CPU 225
+    elif [ $CPU_TEMP -ge 90 ]; then
+        set_fan CPU 190
     elif [ $CPU_TEMP -ge 85 ]; then
-        set_fan CPU 180
-    elif [ $CPU_TEMP -ge 80 ]; then
-        echo "Waiting to modify (80-85)..."
+        echo "Waiting to modify (85-90)..."
     else
         set_fan CPU 0
     fi
