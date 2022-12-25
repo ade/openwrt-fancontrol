@@ -7,7 +7,7 @@ A replacement for /sbin/fan_ctrl.sh, based on [this post](https://forum.openwrt.
 * Download the new fan controller, save it to  /etc/, and make it executable.
 ```
 wget --no-check-certificate https://raw.githubusercontent.com/ade/openwrt-fancontrol/master/fancontrol.sh -O /etc/fancontrol.sh
-chmod +x fancontrol.sh
+chmod +x /etc/fancontrol.sh
 ```
 
 * Test it to make sure that it runs correctly.
