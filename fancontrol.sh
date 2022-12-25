@@ -90,43 +90,33 @@ check_load() {
         if [ $VERBOSE == 1 ]; then
             echo "Checking Load ${LOAD}"
         fi
-
-        # trigger the emergency cooldown if we're using more than 1 core
-        if [ $(float_ge $LOAD 1.0) == 1 ]; then
-            start_emergency_cooldown
-
-            break
-        fi
     done
 }
 
-# makes sure that the temperatures haven't fluctuated by more than 1.5 degrees
 check_temp_change() {
     TEMP_CHANGE=$(($3 - $2));
 
     if [ $VERBOSE == 1 ]; then
         echo "${1} original temp: ${2} | new temp: ${3} | change: ${TEMP_CHANGE}"
     fi
-
-    if [ $(float_ge $TEMP_CHANGE $EMERGENCY_COOLDOWN_TEMP_CHANGE) == 1 ]; then
-       start_emergency_cooldown;
-
-       continue;
-    fi
 }
 
 # set fan speeds based on CPU temperatures
 check_cpu_temp() {
     if [ $VERBOSE == 1 ] ; then
-        echo "Checking CPU Temp ${CPU_TEMP}"
+        echo "Current CPU Temp ${CPU_TEMP}"
     fi
 
-    if [ $CPU_TEMP -ge 85 ]; then
+    if [ $CPU_TEMP -ge 95 ]; then
         set_fan CPU 255
-    elif [ $(float_ge $CPU_TEMP 82.5) == 1 ]; then
+    elif [ $(float_ge $CPU_TEMP 90.0) == 1 ]; then
         set_fan CPU 127
-    elif [ $CPU_TEMP -ge 80 ]; then
+    elif [ $CPU_TEMP -ge 85 ]; then
         set_fan CPU 64
+    elif [ $CPU_TEMP -ge 80 ]; then
+        echo "Waiting to modify (80-85)..."
+    else
+        set_fan CPU 0
     fi
 }
 
