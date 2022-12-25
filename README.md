@@ -1,5 +1,8 @@
 # (fork) openwrt-fancontrol
 
+Fan control script for OpenWRT on WRT1900ACv1
+CPU = Marvell MV78230 (1.2 GHz, 2 Cores) Armada XP
+
 A replacement for /sbin/fan_ctrl.sh, based on [this post](https://forum.openwrt.org/viewtopic.php?pid=280811#p280811) from the OpenWRT wrt1900ac thread.
 
 ####To use it:
