@@ -121,20 +121,12 @@ check_cpu_temp() {
         echo "Checking CPU Temp ${CPU_TEMP}"
     fi
 
-    if [ $CPU_TEMP -ge 70 ]; then
+    if [ $CPU_TEMP -ge 85 ]; then
         set_fan CPU 255
-    elif [ $(float_ge $CPU_TEMP 67.5) == 1 ]; then
-        set_fan CPU 223
-    elif [ $CPU_TEMP -ge 65 ]; then
-        set_fan CPU 191
-    elif [ $(float_ge $CPU_TEMP 62.5) == 1 ]; then
-        set_fan CPU 159
-    elif [ $CPU_TEMP -ge 60 ]; then
+    elif [ $(float_ge $CPU_TEMP 82.5) == 1 ]; then
         set_fan CPU 127
-    elif [ $CPU_TEMP -ge 55 ]; then
-        set_fan CPU 95
-    elif [ $CPU_TEMP -ge 50 ]; then
-        set_fan CPU 63
+    elif [ $CPU_TEMP -ge 80 ]; then
+        set_fan CPU 64
     fi
 }
 
