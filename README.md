@@ -8,7 +8,7 @@ Lets the CPU run to 90c before starting the fan in a low setting. 85-90c is a hy
 
 I've found that the (stock) fan does not spin up at all on PWM setting below 190 at least on my unit, so thats the lowest one used.
 
-A replacement for /sbin/fan_ctrl.sh, based on [this post](https://forum.openwrt.org/viewtopic.php?pid=280811#p280811) from the OpenWRT wrt1900ac thread.
+Tested with OpenWrt 22.03.2
 
 ####To use it:
 
