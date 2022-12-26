@@ -6,7 +6,7 @@ CPU = Marvell MV78230 (1.2 GHz, 2 Cores) Armada XP (Junction Temperature 105c)
 
 Lets the CPU run to 90c before starting the fan in a low setting. 85-90c is a hysterisis period and won't enable/disable the fan. Reaching 85c again will disable the fan. Highest RPMs apply at 95 and 98c.
 
-I've found that the (stock) fan does not spin up at all on PWM setting below 190 at least on my unit, so thats the lowest one used.
+I've found that the (stock) fan does not spin up reliably on PWM setting below 190 at least on my unit, so thats the lowest one used.
 
 Tested with OpenWrt 22.03.2
 
