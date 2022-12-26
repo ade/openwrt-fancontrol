@@ -38,7 +38,7 @@ chmod +x /etc/fancontrol.sh
 
 #### Optional
 * Have this run on boot.
-* Add this to /etc/rc.local (In LuCI, it's System > Startup)
+* Add this to /etc/rc.local (In LuCI, it's System > Startup -> Local startup)
 ```
 /etc/fancontrol.sh &
 ```
