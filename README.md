@@ -1,8 +1,12 @@
-# (fork) openwrt-fancontrol
+# openwrt-fancontrol (fork)
 
 Fan control script for OpenWRT on WRT1900ACv1
 
 CPU = Marvell MV78230 (1.2 GHz, 2 Cores) Armada XP (Junction Temperature 105c)
+
+Lets the CPU run to 90c before starting the fan in a low setting. 85-90c is a hysterisis period and won't enable/disable the fan. Reaching 85c again will disable the fan. Highest RPMs apply at 95 and 98c.
+
+I've found that the (stock) fan does not spin up at all on PWM setting below 190 at least on my unit, so thats the lowest one used.
 
 A replacement for /sbin/fan_ctrl.sh, based on [this post](https://forum.openwrt.org/viewtopic.php?pid=280811#p280811) from the OpenWRT wrt1900ac thread.
 
