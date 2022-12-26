@@ -3,17 +3,13 @@
 # OpenWRT fan control using RickStep and Chadster766's logic
 
 # SLEEP_DURATION and CPU_TEMP_CHECK need to be multiples of each other
-EMERGENCY_COOLDOWN_DURATION=30
 SLEEP_DURATION=5
 CPU_TEMP_CHECK=20
-DEFAULT_SPEED=225
-EMERGENCY_COOLDOWN_TEMP_CHANGE=3                         
+DEFAULT_SPEED=225                  
 
 # DON'T MESS WITH THESE
 VERBOSE=0
-LAST_FAN_SPEED=$DEFAULT_SPEED
-EMERGENCY_COOLDOWN=0                
-EMERGENCY_COOLDOWN_TIMER=0                         
+LAST_FAN_SPEED=$DEFAULT_SPEED                  
 ELAPSED_TIME=0 
 CPU_TEMP=0
 RAM_TEMP=0
@@ -67,21 +63,7 @@ set_fan() {
 float_ge() {
     awk -v n1=$1 -v n2=$2 "BEGIN { if ( n1 >= n2 ) exit 1; exit 0; }"
     echo $?
-}
-
-# start the emergency cooldown mode
-start_emergency_cooldown() {
-    if [ $VERBOSE == 1 ]; then
-        echo
-        echo "Starting Emergency Cooldown!"
-    fi
-
-    # toggle the cooldown bit to on and reset the timer
-    EMERGENCY_COOLDOWN=1
-    EMERGENCY_COOLDOWN_TIMER=$EMERGENCY_COOLDOWN_DURATION
-
-    set_fan EMERGENCY 255
-}              
+}          
 
 # check for load averages above 1.0
 check_load() {
@@ -114,7 +96,9 @@ check_cpu_temp() {
     elif [ $CPU_TEMP -ge 90 ]; then
         set_fan CPU 190
     elif [ $CPU_TEMP -ge 85 ]; then
-        echo "Waiting to modify (85-90)..."
+        if [ $VERBOSE == 1 ]; then
+            echo "Waiting to modify (85-90)..."
+        fi
     else
         set_fan CPU 0
     fi
@@ -131,35 +115,6 @@ get_temps
 # - look at temperature deltas every $SLEEP_DURATION seconds
 # - look at raw cpu temp every $CPU_TEMP_CHECK seconds
 while true ; do
-
-    # handle emergency cooldown stuff
-    if [ $EMERGENCY_COOLDOWN == 1 ]; then
-
-        # reduce the number of seconds left in emergency cooldown mode
-        EMERGENCY_COOLDOWN_TIMER=$((${EMERGENCY_COOLDOWN_TIMER} - 5))
-
-        # do we still need to be in cooldown?
-        if [ $EMERGENCY_COOLDOWN_TIMER -le 0 ]; then
-
-            set_fan LAST $LAST_FAN_SPEED                              
-
-            EMERGENCY_COOLDOWN=0                                      
-
-            if [ $VERBOSE == 1 ]; then
-                echo "Exiting Emergency Cooldown Mode!"
-                echo
-            fi
-
-        else
-            if [ $VERBOSE == 1 ]; then
-                echo "Still in Emergency Cooldown. ${EMERGENCY_COOLDOWN_TIMER} seconds left."
-            fi
-
-            sleep $SLEEP_DURATION
-
-            continue
-        fi
-    fi
 
     # save the previous temperatures                                    
     LAST_CPU_TEMP=$CPU_TEMP                                            
