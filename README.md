@@ -1,6 +1,6 @@
 # openwrt-fancontrol (fork)
 
-Fan control script for OpenWRT on WRT1900ACv1
+Fan control script for OpenWRT on WRT1900ACv1 with focus on being quiet
 
 CPU = Marvell MV78230 (1.2 GHz, 2 Cores) Armada XP (Junction Temperature 105c)
 
@@ -9,6 +9,8 @@ Lets the CPU run to 90c before starting the fan in a low setting. 85-90c is a hy
 I've found that the (stock) fan does not spin up at all on PWM setting below 190 at least on my unit, so thats the lowest one used.
 
 Tested with OpenWrt 22.03.2
+
+The "emergency" cooldown bit has been removed from this fork.
 
 #### To use it:
 
