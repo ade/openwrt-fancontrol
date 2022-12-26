@@ -10,7 +10,7 @@ I've found that the (stock) fan does not spin up at all on PWM setting below 190
 
 Tested with OpenWrt 22.03.2
 
-####To use it:
+#### To use it:
 
 * Download the new fan controller, save it to  /etc/, and make it executable.
 ```
@@ -28,13 +28,13 @@ chmod +x /etc/fancontrol.sh
 /etc/fancontrol.sh &
 ```
 
-####Disable the orginal fan controller.
+#### Disable the orginal fan controller.
 *	Remove or comment out this line from /etc/crontabs/root (In LuCI, it's System > Scheduled Tasks)
 ```
  */5 * * * * /sbin/fan_ctrl.sh
 ```
 
-####Optional
+#### Optional
 * Have this run on boot.
 * Add this to /etc/rc.local (In LuCI, it's System > Startup)
 ```
